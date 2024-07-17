@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@font-face {
+  font-family: "TradeGothic LT Extended";
+  src: url("/public/TradeGothicLTStd-BoldExt.otf");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "TradeGothic LT Extended";
+  src: url("/public/Trade Gothic LT Extended.ttf");
+  font-weight: 400;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply leading-[normal] m-0;
+}
+*,
+::before,
+::after {
+  border-width: 0;
+}
