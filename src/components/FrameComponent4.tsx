@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 
 export type FrameComponent4Type = {
   className?: string;
@@ -7,6 +7,23 @@ export type FrameComponent4Type = {
 const FrameComponent4: FunctionComponent<FrameComponent4Type> = ({
   className = "",
 }) => {
+  const [activeTab, setActiveTab] = useState<"flight" | "stays">("flight");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleTabChange = (tab: "flight" | "stays") => {
+    setActiveTab(tab);
+    console.log(`Switched to ${tab} tab`);
+  };
+
+  const handleLoginToggle = () => {
+    setIsLoggedIn(!isLoggedIn);
+    console.log(isLoggedIn ? "User logged out" : "User logged in");
+  };
+
+  const handleSignUp = () => {
+    console.log("Open sign up modal");
+  };
+
   return (
     <section
       className={`self-stretch flex flex-row items-start justify-end pt-[0rem] px-[1.875rem] pb-[19.75rem] box-border max-w-full mq450:pb-[12.813rem] mq450:box-border ${className}`}
@@ -14,27 +31,33 @@ const FrameComponent4: FunctionComponent<FrameComponent4Type> = ({
       <header className="flex-1 flex flex-row items-center justify-between py-[1.5rem] px-[2rem] box-border relative gap-[1.25rem] max-w-full z-[2] text-left text-[0.875rem] text-neutrals font-montserrat-medium-14">
         <div className="w-[44.65rem] flex flex-row items-center justify-start gap-[22.625rem] max-w-full mq750:gap-[11.313rem] mq1050:w-[29.525rem] mq450:gap-[5.625rem]">
           <div className="flex flex-row items-start justify-start gap-[2rem] mq1050:hidden">
-            <div className="flex flex-row items-center justify-start gap-[0.25rem]">
+            <div 
+              className={`flex flex-row items-center justify-start gap-[0.25rem] z-10 cursor-pointer ${activeTab === "flight" ? "text-mint-green" : ""}`}
+              onClick={() => handleTabChange("flight")}
+            >
               <img
                 className="h-[1.5rem] w-[1.5rem] relative overflow-hidden shrink-0"
                 loading="lazy"
                 alt=""
                 src="/airplane.svg"
               />
-              <a className="[text-decoration:none] relative font-semibold text-[inherit] inline-block min-w-[4.938rem] whitespace-nowrap">
+              <span className="relative font-semibold text-[inherit] inline-block min-w-[4.938rem] whitespace-nowrap">
                 Find Flight
-              </a>
+              </span>
             </div>
-            <div className="flex flex-row items-center justify-start gap-[0.25rem]">
+            <div 
+              className={`flex flex-row items-center justify-start gap-[0.25rem] z-10 cursor-pointer ${activeTab === "stays" ? "text-mint-green" : ""}`}
+              onClick={() => handleTabChange("stays")}
+            >
               <img
                 className="h-[1.5rem] w-[1.5rem] relative overflow-hidden shrink-0"
                 loading="lazy"
                 alt=""
                 src="/ionbed.svg"
               />
-              <a className="[text-decoration:none] relative font-semibold text-[inherit] inline-block min-w-[4.688rem] whitespace-nowrap">
+              <span className="relative font-semibold text-[inherit] inline-block min-w-[4.688rem] whitespace-nowrap">
                 Find Stays
-              </a>
+              </span>
             </div>
           </div>
           <img
@@ -44,15 +67,21 @@ const FrameComponent4: FunctionComponent<FrameComponent4Type> = ({
             src="/logo@2x.png"
           />
         </div>
-        <div className="w-[11.063rem] flex flex-row items-center justify-start gap-[2rem]">
-          <a className="[text-decoration:none] relative font-semibold text-[inherit] inline-block min-w-[2.563rem]">
-            Login
-          </a>
-          <button className="cursor-pointer [border:none] p-0 bg-neutrals rounded-lg overflow-hidden flex flex-col items-center justify-center">
+        <div className="w-[11.063rem] flex flex-row items-center justify-start gap-[2rem] z-10">
+          <button
+            className="[text-decoration:none] relative font-semibold text-[inherit] inline-block min-w-[2.563rem] cursor-pointer bg-transparent border-none"
+            onClick={handleLoginToggle}
+          >
+            {isLoggedIn ? "Logout" : "Login"}
+          </button>
+          <button 
+            className="cursor-pointer [border:none] p-0 bg-neutrals rounded-lg overflow-hidden flex flex-col items-center justify-center"
+            onClick={handleSignUp}
+          >
             <div className="flex flex-row items-center justify-center py-[0.968rem] px-[1.5rem]">
-              <a className="[text-decoration:none] relative text-[0.875rem] font-semibold font-montserrat-medium-14 text-blackish-green text-center inline-block min-w-[3.5rem] whitespace-nowrap">
+              <span className="relative text-[0.875rem] font-semibold font-montserrat-medium-14 text-blackish-green text-center inline-block min-w-[3.5rem] whitespace-nowrap">
                 Sign up
-              </a>
+              </span>
             </div>
           </button>
         </div>

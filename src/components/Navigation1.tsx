@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 
 export type Navigation1Type = {
   className?: string;
@@ -7,6 +7,41 @@ export type Navigation1Type = {
 const Navigation1: FunctionComponent<Navigation1Type> = ({
   className = "",
 }) => {
+  const [fromTo, setFromTo] = useState("Lahore - Karachi");
+  const [tripType, setTripType] = useState("Return");
+  const [dates, setDates] = useState("07 Nov 22 - 13 Nov 22");
+  const [passengers, setPassengers] = useState("1 Passenger, Economy");
+  const [promoCode, setPromoCode] = useState("");
+
+  const handleFromToChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFromTo(e.target.value);
+  };
+
+  const handleTripTypeChange = () => {
+    setTripType(tripType === "Return" ? "One-way" : "Return");
+  };
+
+  const handleDatesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDates(e.target.value);
+  };
+
+  const handlePassengersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassengers(e.target.value);
+  };
+
+  const handlePromoCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPromoCode(e.target.value);
+  };
+
+  const handleShowFlights = () => {
+    console.log("Selected values:");
+    console.log("From - To:", fromTo);
+    console.log("Trip Type:", tripType);
+    console.log("Dates:", dates);
+    console.log("Passengers:", passengers);
+    console.log("Promo Code:", promoCode);
+  };
+
   return (
     <div
       className={`w-[78.25rem] flex flex-row items-start justify-start pt-[0rem] pb-[0.625rem] pr-[1.25rem] pl-[0rem] box-border max-w-full text-left text-[0.875rem] text-blackish-green font-montserrat-medium-14 ${className}`}
@@ -59,6 +94,8 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                     className="w-[8.125rem] [border:none] [outline:none] bg-[transparent] h-[1.25rem] flex flex-row items-center justify-start font-montserrat-medium-14 text-[1rem] text-gray-300"
                     placeholder="Lahore - Karachi"
                     type="text"
+                    value={fromTo}
+                    onChange={handleFromToChange}
                   />
                   <div className="!m-[0] absolute top-[-1rem] left-[-0.25rem] bg-neutrals flex flex-row items-center justify-start py-[0rem] px-[0.25rem] whitespace-nowrap">
                     <div className="relative inline-block min-w-[4.188rem]">
@@ -75,17 +112,15 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                 </div>
               </div>
             </div>
-            <div className="w-[13.125rem] hidden flex-row items-start justify-start pt-[0.25rem] px-[1rem] pb-[0rem] box-border text-gray-300">
-              <div className="flex-1 relative">Supporting text</div>
-            </div>
           </div>
+
           <div className="rounded-t rounded-b-none flex flex-col items-start justify-start text-[1rem]">
             <div className="rounded bg-neutrals flex flex-col items-start justify-start border-[1px] border-solid border-gray-200">
               <div className="rounded-t rounded-b-none flex flex-row items-center justify-start py-[0.25rem] pr-[0rem] pl-[1rem]">
                 <div className="h-[2.5rem] flex flex-col items-start justify-center pt-[0rem] pb-[0.625rem] pr-[1.25rem] pl-[0rem] box-border relative">
                   <div className="flex flex-row items-center justify-start">
                     <div className="relative inline-block min-w-[3.5rem]">
-                      Return
+                      {tripType}
                     </div>
                   </div>
                   <div className="!m-[0] absolute top-[-1rem] left-[-0.25rem] bg-neutrals flex flex-row items-center justify-start py-[0rem] px-[0.25rem] text-[0.875rem] text-blackish-green">
@@ -94,7 +129,7 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col items-center justify-center p-[0.75rem]">
+                <div className="flex flex-col items-center justify-center p-[0.75rem]" onClick={handleTripTypeChange}>
                   <img
                     className="w-[1.5rem] h-[1.5rem] relative overflow-hidden shrink-0"
                     alt=""
@@ -103,12 +138,8 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                 </div>
               </div>
             </div>
-            <div className="self-stretch hidden flex-row items-start justify-start pt-[0.25rem] px-[1rem] pb-[0rem] text-[0.875rem]">
-              <div className="flex-1 relative whitespace-nowrap">
-                Supporting text
-              </div>
-            </div>
           </div>
+
           <div className="flex-1 rounded-t rounded-b-none flex flex-col items-start justify-start min-w-[13.188rem] max-w-full">
             <div className="self-stretch h-[3.5rem] rounded bg-neutrals box-border flex flex-col items-start justify-start border-[1px] border-solid border-gray-200">
               <div className="w-[13.125rem] flex-1 rounded-t rounded-b-none flex flex-row items-center justify-start py-[0.5rem] pr-[0rem] pl-[1rem] box-border">
@@ -117,6 +148,8 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                     className="w-full [border:none] [outline:none] bg-[transparent] self-stretch h-[1.25rem] flex flex-row items-center justify-start font-montserrat-medium-14 text-[1rem] text-gray-300 min-w-[6.25rem]"
                     placeholder="07 Nov 22 - 13 Nov 22"
                     type="text"
+                    value={dates}
+                    onChange={handleDatesChange}
                   />
                   <div className="!m-[0] absolute top-[-1rem] left-[-0.25rem] bg-neutrals flex flex-row items-center justify-start py-[0rem] px-[0.25rem] whitespace-nowrap">
                     <div className="relative inline-block min-w-[6.688rem]">
@@ -126,10 +159,8 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                 </div>
               </div>
             </div>
-            <div className="w-[13.125rem] hidden flex-row items-start justify-start pt-[0.25rem] px-[1rem] pb-[0rem] box-border">
-              <div className="flex-1 relative">Supporting text</div>
-            </div>
           </div>
+
           <div className="flex-1 rounded-t rounded-b-none flex flex-col items-start justify-start min-w-[13.188rem] max-w-full">
             <div className="self-stretch h-[3.5rem] rounded bg-neutrals box-border flex flex-col items-start justify-start border-[1px] border-solid border-gray-200">
               <div className="self-stretch flex-1 rounded-t rounded-b-none flex flex-row items-center justify-start py-[0.5rem] pr-[0rem] pl-[1rem]">
@@ -138,6 +169,8 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                     className="w-[11.125rem] [border:none] [outline:none] bg-[transparent] h-[1.25rem] flex flex-row items-center justify-start font-montserrat-medium-14 text-[1rem] text-gray-300"
                     placeholder="1 Passenger, Economy"
                     type="text"
+                    value={passengers}
+                    onChange={handlePassengersChange}
                   />
                   <div className="!m-[0] absolute top-[-1rem] left-[-0.25rem] bg-neutrals flex flex-row items-center justify-start py-[0rem] px-[0.25rem] whitespace-nowrap">
                     <div className="relative inline-block min-w-[7.625rem]">
@@ -147,11 +180,9 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                 </div>
               </div>
             </div>
-            <div className="w-[13.125rem] hidden flex-row items-start justify-start pt-[0.25rem] px-[1rem] pb-[0rem] box-border">
-              <div className="flex-1 relative">Supporting text</div>
-            </div>
           </div>
         </div>
+
         <div className="flex flex-row items-center justify-center py-[0rem] pr-[1rem] pl-[53.625rem] gap-[1.5rem] mq750:pl-[13.375rem] mq750:box-border mq450:pl-[1.25rem] mq450:box-border mq1225:flex-wrap mq1225:pl-[26.813rem] mq1225:box-border">
           <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-col items-start justify-start">
             <button className="cursor-pointer [border:none] py-[0.968rem] px-[0rem] bg-[transparent] rounded flex flex-row items-center justify-center gap-[0.25rem]">
@@ -161,13 +192,19 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                 alt=""
                 src="/addoutline.svg"
               />
-              <div className="relative text-[0.875rem] font-medium font-montserrat-medium-14 text-blackish-green text-left inline-block min-w-[7.625rem]">
-                Add Promo Code
-              </div>
+              <input
+                className="relative text-[0.875rem] font-medium font-montserrat-medium-14 text-blackish-green text-left inline-block min-w-[7.625rem] bg-transparent border-none"
+                placeholder="Add Promo Code"
+                value={promoCode}
+                onChange={handlePromoCodeChange}
+              />
             </button>
           </button>
           <div className="flex flex-col items-start justify-start">
-            <div className="rounded bg-mint-green flex flex-row items-center justify-center py-[0.968rem] px-[1rem] gap-[0.25rem] whitespace-nowrap">
+            <button
+              className="rounded bg-mint-green flex flex-row items-center justify-center py-[0.968rem] px-[1rem] gap-[0.25rem] whitespace-nowrap cursor-pointer border-none"
+              onClick={handleShowFlights}
+            >
               <img
                 className="h-[1rem] w-[1rem] relative overflow-hidden shrink-0"
                 loading="lazy"
@@ -175,14 +212,14 @@ const Navigation1: FunctionComponent<Navigation1Type> = ({
                 src="/paper-plane.svg"
               />
               <div className="relative font-medium inline-block min-w-[5.75rem]">
-                Show Filghts
+                Show Flights
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default Navigation1;

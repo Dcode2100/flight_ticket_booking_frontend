@@ -39,7 +39,7 @@ const LandingPage: FunctionComponent = () => {
     
 
       <FrameComponent4 />
-      <section className="w-[84.75rem] flex flex-col items-start justify-start py-[0rem] pr-[0rem] pl-[1.25rem] box-border gap-[4.375rem] max-w-full mq750:gap-[2.188rem] mq450:gap-[1.063rem]">
+      <section className="w-[84.75rem] flex flex-col items-start justify-start py-[0rem] pr-[0rem]  box-border gap-[4.375rem] max-w-full mq750:gap-[2.188rem] mq450:gap-[1.063rem]">
         <Navigation1 />
         <FrameComponent2 />
         <FrameComponent1 />
